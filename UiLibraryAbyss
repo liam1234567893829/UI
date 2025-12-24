@@ -346,7 +346,9 @@ do
         local Window = {
             Max = 2, Current = 0
         }
-        --        --
+        --
+        Library.Theme.Logo = Utility.AddImage("Abyss/Assets/UI/Logo2.png", "https://i.imgur.com/HI4UTmZ.png")
+        --
         local WindowOutline = Utility.AddDrawing("Square", {
             Size = WindowSize,
             Thickness = 0,
@@ -493,6 +495,7 @@ do
         Window.SetText(1, "Checking Assets")
         --
         Window.SetText(1, "Checking Input")
+        Utility.CLCheck(Window)
         --
         Window.SetText(2, "Finished")
         --
@@ -4285,14 +4288,14 @@ local Window = Library.Window("abyss dev access | da hood", Vector2.new(500, 620
 Window.Watermark("Abyss | Dev Build")
 
 -- // UI Main \\ --
-local VoidMobs = Window:Tab("main")
-local VoidMobs = Legit:Section("legit", "Left")
-VoidMobs:Toggle({Title = "Enmity Void", Flag = "VoidEnmityMob"})
-VoidMobs:Toggle({Title = "VoidMobs", Flag = "VoidMobOverworld"})
-VoidMobs:Toggle({Title = "BringMobs", Flag = "BringEntityOverworld"})
-VoidMobs:Slider({Title = "smoothing [mouse]", Flag = "Smoothness", Symbol = "", Default = 0, Min = 0, Max = 20, Decimals = 1})
-VoidMobs:Dropdown({Title = "hitbox priority", List = {"Head", "Body"}, Default = "Head", Flag = "AimlockHitbox"})
-VoidMobs:Dropdown({Title = "mode", List = {"Camera", "Mouse"}, Default = "Camera", Flag = "AimbotMode"})
+local Legit = Window:Tab("main")
+local Aimbot = Legit:Section("legit", "Left")
+Aimbot:Toggle({Title = "aimbot", Flag = "Aimlock"}):Keybind({Title = "Aiming", Flag = "Aiming", Key = Enum.UserInputType.MouseButton2, StateType = "Hold"})
+Aimbot:Toggle({Title = "visible check", Flag = "AimlockWallCheck"})
+Aimbot:Toggle({Title = "apply prediction", Flag = "AdjustBulletDrop"})
+Aimbot:Slider({Title = "smoothing [mouse]", Flag = "Smoothness", Symbol = "", Default = 0, Min = 0, Max = 20, Decimals = 1})
+Aimbot:Dropdown({Title = "hitbox priority", List = {"Head", "Body"}, Default = "Head", Flag = "AimlockHitbox"})
+Aimbot:Dropdown({Title = "mode", List = {"Camera", "Mouse"}, Default = "Camera", Flag = "AimbotMode"})
 
 local BulletRedirection = Legit:Section("bullet redirection", "Left")
 BulletRedirection:Toggle({Title = "silent aim", Flag = "SilentAim", Type = "Dangerous"})
@@ -4345,3 +4348,6 @@ GunMods:Toggle({Title = "no recoil", Flag = "NoRecoil"})
 Window.ToggleAnime(false)
 Window:SwitchTab(Legit)
 LoadTime = math.floor((tick() - LoadTime) * 1000)
+
+Window.SendNotification("Normal", ("Done loading the cheat. (%d ms)"):format(LoadTime), 3)
+Window.SendNotification("Normal", "Press RightShift to open menu and close menu!", 3)
